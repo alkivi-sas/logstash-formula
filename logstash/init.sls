@@ -48,9 +48,9 @@ add adm group to logstash service account:
 logstash-config-inputs:
   file.managed:
     - name: /etc/logstash/conf.d/01-inputs.conf
-    - user: root
+    - user: logstash
     - group: root
-    - mode: 755
+    - mode: 640
     - source: salt://logstash/files/01-inputs.conf
     - template: jinja
     - require:
@@ -65,9 +65,9 @@ logstash-config-inputs:
 logstash-config-filters:
   file.managed:
     - name: /etc/logstash/conf.d/02-filters.conf
-    - user: root
+    - user: logstash
     - group: root
-    - mode: 755
+    - mode: 640
     - source: salt://logstash/files/02-filters.conf
     - template: jinja
     - require:
@@ -82,9 +82,9 @@ logstash-config-filters:
 logstash-config-outputs:
   file.managed:
     - name: /etc/logstash/conf.d/03-outputs.conf
-    - user: root
+    - user: logstash
     - group: root
-    - mode: 755
+    - mode: 640
     - source: salt://logstash/files/03-outputs.conf
     - template: jinja
     - require:
