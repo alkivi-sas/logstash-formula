@@ -1,3 +1,4 @@
+{#- Debian 13 has no openjdk-8; logstash ships its own JDK #}
 {% set logstash = salt['grains.filter_by']({
   'Debian': {
     'use_upstream_repo': True,
@@ -5,7 +6,7 @@
     'svc': 'logstash',
     'pkgstate': 'latest',
     'indent': 4,
-    'java': 'openjdk-8-jre-headless',
+    'java': None if salt['grains.get']('osmajorrelease', 0)|int >= 13 else 'openjdk-8-jre-headless',
   },
   'RedHat': {
     'use_upstream_repo': True,

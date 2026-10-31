@@ -11,11 +11,16 @@ logstash-pkg:
     {%- if logstash.use_upstream_repo %}
     - require:
       - pkgrepo: logstash-repo
+      {%- if logstash.java %}
       - pkg: {{ logstash.java }}
+      {%- endif %}
     {%- endif %}
+
+{%- if logstash.java %}
 
 {{ logstash.java }}:
   pkg.installed
+{%- endif %}
 
 # This gets around a user permissions bug with the logstash user/group
 # being able to read /var/log/syslog, even if the group is properly set for
